@@ -1,5 +1,5 @@
 TEMPLATE	= app
-TARGET		= moc
+TARGET		= moc-qt4
 
 DEFINES	       += QT_MOC
 DESTDIR         = ../../../bin

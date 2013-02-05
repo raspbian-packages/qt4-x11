@@ -1,5 +1,5 @@
 TEMPLATE        = app
-TARGET          = lrelease
+TARGET          = lrelease-qt4
 DESTDIR         = ../../../bin
 
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII

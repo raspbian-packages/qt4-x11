@@ -782,7 +782,7 @@ namespace qdesigner_internal
         binary += QDir::separator();
         switch (mode) {
         case UIC_GenerateCode:
-            binary += QLatin1String("uic");
+            binary += QLatin1String("uic-qt4");
             break;
         case UIC_ConvertV3:
             binary += QLatin1String("uic3");

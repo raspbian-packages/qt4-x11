@@ -4847,7 +4847,7 @@ setBootstrapVariable()
 }
 
 # build qmake
-if true; then ###[ '!' -f "$outpath/bin/qmake" ];
+if true; then ###[ '!' -f "$outpath/bin/qmake-qt4" ];
     echo "Creating qmake. Please wait..."
 
     OLD_QCONFIG_H=
@@ -8544,8 +8544,8 @@ QMAKE_ABSOLUTE_SOURCE_ROOT = \$\$QT_SOURCE_TREE
 QMAKE_MOC_SRC    = \$\$QT_BUILD_TREE/src/moc
 
 #local paths that cannot be queried from the QT_INSTALL_* properties while building QTDIR
-QMAKE_MOC        = \$\$QT_BUILD_TREE/bin/moc
-QMAKE_UIC        = \$\$QT_BUILD_TREE/bin/uic
+QMAKE_MOC        = \$\$QT_BUILD_TREE/bin/moc-qt4
+QMAKE_UIC        = \$\$QT_BUILD_TREE/bin/uic-qt4
 QMAKE_UIC3       = \$\$QT_BUILD_TREE/bin/uic3
 QMAKE_RCC        = \$\$QT_BUILD_TREE/bin/rcc
 QMAKE_QDBUSXML2CPP = \$\$QT_BUILD_TREE/bin/qdbusxml2cpp
@@ -8948,11 +8948,11 @@ EXEC=""
 
 echo "Finding project files. Please wait..."
 if [ "$CFG_NOPROCESS" != "yes" ]; then
-    "$outpath/bin/qmake" -prl -r "${relpath}/projects.pro"
+    "$outpath/bin/qmake-qt4" -prl -r "${relpath}/projects.pro"
     if [ -f "${relpath}/projects.pro" ]; then
         mkfile="${outpath}/Makefile"
         [ -f "$mkfile" ] && chmod +w "$mkfile"
-        QTDIR="$outpath" "$outpath/bin/qmake" -spec "$XQMAKESPEC" "${relpath}/projects.pro" -o "$mkfile"
+        QTDIR="$outpath" "$outpath/bin/qmake-qt4" -spec "$XQMAKESPEC" "${relpath}/projects.pro" -o "$mkfile"
     fi
 fi
 
@@ -9139,7 +9139,7 @@ for file in .projects .projects.3; do
         QMAKE_SPEC_ARGS="-spec $SPEC"
         echo $ECHO_N "  for $a$ECHO_C"
 
-        QMAKE="$outpath/bin/qmake"
+        QMAKE="$outpath/bin/qmake-qt4"
 	QMAKE_ARGS="$QMAKE_SWITCHES $QMAKE_SPEC_ARGS"
         if [ "$file" = ".projects.3" ]; then
             echo " (fast)"
