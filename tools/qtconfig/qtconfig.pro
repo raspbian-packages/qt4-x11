@@ -19,7 +19,7 @@ FORMS        = mainwindow.ui paletteeditoradvanced.ui previewwidget.ui
 RESOURCES    = qtconfig.qrc
 
 PROJECTNAME        = Qt Configuration
-TARGET             = qtconfig
+TARGET             = qtconfig-qt4
 DESTDIR            = ../../bin
 
 target.path=$$[QT_INSTALL_BINS]

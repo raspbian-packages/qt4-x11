@@ -23,7 +23,7 @@ contains(CONFIG, static) {
     DEFINES += QT_DESIGNER_STATIC
 }
 
-TARGET = designer
+TARGET = designer-qt4
 
 include(../../../shared/fontpanel/fontpanel.pri)
 include(../../../shared/qttoolbardialog/qttoolbardialog.pri)

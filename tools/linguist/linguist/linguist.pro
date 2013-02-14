@@ -69,7 +69,7 @@ HEADERS += \
 
 contains(QT_PRODUCT, OpenSource.*):DEFINES *= QT_OPENSOURCE
 DEFINES += QT_KEYWORDS
-TARGET = linguist
+TARGET = linguist-qt4
 win32:RC_FILE = linguist.rc
 mac {
     static:CONFIG -= global_init_link_order

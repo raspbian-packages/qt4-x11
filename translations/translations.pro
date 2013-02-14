@@ -1,8 +1,8 @@
 TRANSLATIONS = $$files(*.ts)
 
-qtPrepareTool(LRELEASE, lrelease)
+qtPrepareTool(LRELEASE, lrelease-qt4)
 qtPrepareTool(LCONVERT, lconvert)
-qtPrepareTool(LUPDATE, lupdate)
+qtPrepareTool(LUPDATE, lupdate-qt4)
 LUPDATE += -locations relative -no-ui-lines
 
 TS_TARGETS =
@@ -96,7 +96,7 @@ updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_BASE}.qm
 isEmpty(vcproj):updateqm.variable_out = PRE_TARGETDEPS
 updateqm.commands = $$LRELEASE ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
-silent:updateqm.commands = @echo lrelease ${QMAKE_FILE_IN} && $$updateqm.commands
+silent:updateqm.commands = @echo lrelease-qt4 ${QMAKE_FILE_IN} && $$updateqm.commands
 updateqm.name = LRELEASE ${QMAKE_FILE_IN}
 updateqm.CONFIG += no_link
 QMAKE_EXTRA_COMPILERS += updateqm

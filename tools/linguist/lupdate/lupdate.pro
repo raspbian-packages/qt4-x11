@@ -1,5 +1,5 @@
 TEMPLATE        = app
-TARGET          = lupdate
+TARGET          = lupdate-qt4
 DESTDIR          = ../../../bin
 
 QT              -= gui

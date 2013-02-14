@@ -297,7 +297,7 @@ void MenuManager::showDocInAssistant(const QString &name)
     if (this->assistantProcess.state() != QProcess::Running){
         QString app = QLibraryInfo::location(QLibraryInfo::BinariesPath) + QDir::separator();
 #if !defined(Q_OS_MAC)
-        app += QLatin1String("assistant");
+        app += QLatin1String("assistant-qt4");
 #else
         app += QLatin1String("Assistant.app/Contents/MacOS/Assistant");
 #endif
