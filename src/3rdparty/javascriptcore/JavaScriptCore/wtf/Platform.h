@@ -393,7 +393,7 @@
 #endif
 
 /* OS(LINUX) - Linux */
-#ifdef __linux__
+#if defined(__linux__) || defined(__GLIBC__)
 #define WTF_OS_LINUX 1
 #endif
 
