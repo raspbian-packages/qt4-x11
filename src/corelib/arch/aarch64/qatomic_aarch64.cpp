@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2014 Digia Plc and/or its subsidiary(-ies).
+** Copyright (C) 2012, 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the QtCore module of the Qt Toolkit.
@@ -39,67 +39,32 @@
 **
 ****************************************************************************/
 
-#ifndef QATOMIC_ARCH_H
-#define QATOMIC_ARCH_H
+#include <QtCore/qglobal.h>
 
-QT_BEGIN_HEADER
-
-#include "QtCore/qglobal.h"
-
-#if defined(QT_ARCH_INTEGRITY)
-#  include "QtCore/qatomic_integrity.h"
-#elif defined(QT_ARCH_VXWORKS)
-#  include "QtCore/qatomic_vxworks.h"
-#elif defined(QT_ARCH_ALPHA)
-#  include "QtCore/qatomic_alpha.h"
-#elif defined(QT_ARCH_ARM)
-#  include "QtCore/qatomic_arm.h"
-#elif defined(QT_ARCH_ARMV6)
-#  include "QtCore/qatomic_armv6.h"
-#elif defined(QT_ARCH_AVR32)
-#  include "QtCore/qatomic_avr32.h"
-#elif defined(QT_ARCH_BFIN)
-#  include "QtCore/qatomic_bfin.h"
-#elif defined(QT_ARCH_GENERIC)
-#  include "QtCore/qatomic_generic.h"
-#elif defined(QT_ARCH_I386)
-#  include "QtCore/qatomic_i386.h"
-#elif defined(QT_ARCH_IA64)
-#  include "QtCore/qatomic_ia64.h"
-#elif defined(QT_ARCH_M68K)
-#  include "QtCore/qatomic_m68k.h"
-#elif defined(QT_ARCH_MACOSX)
-#  include "QtCore/qatomic_macosx.h"
-#elif defined(QT_ARCH_MIPS)
-#  include "QtCore/qatomic_mips.h"
-#elif defined(QT_ARCH_PARISC)
-#  include "QtCore/qatomic_parisc.h"
-#elif defined(QT_ARCH_POWERPC)
-#  include "QtCore/qatomic_powerpc.h"
-#elif defined(QT_ARCH_S390)
-#  include "QtCore/qatomic_s390.h"
-#elif defined(QT_ARCH_SPARC)
-#  include "QtCore/qatomic_sparc.h"
-#elif defined(QT_ARCH_WINDOWS)
-#  include "QtCore/qatomic_windows.h"
-#elif defined(QT_ARCH_WINDOWSCE)
-#  include "QtCore/qatomic_windowsce.h"
-#elif defined(QT_ARCH_X86_64)
-#  include "QtCore/qatomic_x86_64.h"
-#elif defined(QT_ARCH_SYMBIAN)
-#  include "QtCore/qatomic_symbian.h"
-#elif defined(QT_ARCH_SH)
-#  include "QtCore/qatomic_sh.h"
-#elif defined(QT_ARCH_SH4A)
-#  include "QtCore/qatomic_sh4a.h"
-#elif defined(QT_ARCH_NACL)
-#  include "QtCore/qatomic_generic.h"
-#elif defined(QT_ARCH_AARCH64)
-#  include "QtCore/qatomic_aarch64.h"
-#else
-#  error "Qt has not been ported to this architecture"
+#include <unistd.h>
+#ifdef _POSIX_PRIORITY_SCHEDULING
+# include <sched.h>
 #endif
+#include <time.h>
 
-QT_END_HEADER
+QT_BEGIN_NAMESPACE
 
-#endif // QATOMIC_ARCH_H
+QT_USE_NAMESPACE
+
+Q_CORE_EXPORT void qt_atomic_yield(int *count)
+{
+#ifdef _POSIX_PRIORITY_SCHEDULING
+    if ((*count)++ < 50) {
+        sched_yield();
+    } else
+#endif
+    {
+        struct timespec tm;
+        tm.tv_sec = 0;
+        tm.tv_nsec = 2000001;
+        nanosleep(&tm, NULL);
+        *count = 0;
+    }
+}
+
+QT_END_NAMESPACE
