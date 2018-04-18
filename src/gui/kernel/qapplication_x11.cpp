@@ -2361,6 +2361,12 @@ void qt_init(QApplicationPrivate *priv, int,
                 break;
             }
 
+            // Check the equivalent environment variable set by MATE
+            if (!qgetenv("MATE_DESKTOP_SESSION_ID").isEmpty()) {
+                X11->desktopEnvironment = DE_GNOME;
+                break;
+            }
+
             rc = XGetWindowProperty(X11->display, QX11Info::appRootWindow(), ATOM(_DT_SAVE_MODE),
                                     0, 2, False, XA_STRING, &type, &format, &length,
                                     &after, &data);
