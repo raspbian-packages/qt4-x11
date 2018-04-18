@@ -2355,6 +2355,11 @@ void qt_init(QApplicationPrivate *priv, int,
                 break;
             }
 
+            if (qgetenv("DESKTOP_SESSION") == "LXDE") {
+                X11->desktopEnvironment = DE_GNOME;
+                break;
+            }
+
             // GNOME_DESKTOP_SESSION_ID is deprecated for some reason, but still check it
             if (!qgetenv("GNOME_DESKTOP_SESSION_ID").isEmpty()) {
                 X11->desktopEnvironment = DE_GNOME;
