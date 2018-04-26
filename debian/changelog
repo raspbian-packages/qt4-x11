@@ -1,9 +1,38 @@
-qt4-x11 (4:4.8.7+dfsg-11+rpi1) stretch-staging; urgency=medium
+qt4-x11 (4:4.8.7+dfsg-15+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 4:4.8.6+git64-g5dc8b2b+dfsg-2+rpi1 by Peter Micheal Green <plugwash@raspbian.org> at Thu, 31 Jul 2014 22:56:54 +0000]
   * Disable neon
 
- -- Raspbian forward porter <root@raspbian.org>  Tue, 15 Nov 2016 19:34:19 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 26 Apr 2018 04:20:50 +0000
+
+qt4-x11 (4:4.8.7+dfsg-15) unstable; urgency=medium
+
+  * Actually upload it to unstable.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Wed, 18 Apr 2018 17:45:31 -0300
+
+qt4-x11 (4:4.8.7+dfsg-14) experimental; urgency=medium
+
+  * Update symbols files with buildds' logs.
+  * Add NEWS.Debian to explicitely tell users of the OpenSSL 1.1 patch.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Wed, 18 Apr 2018 16:30:10 -0300
+
+qt4-x11 (4:4.8.7+dfsg-13) experimental; urgency=medium
+
+  * Add extra patch from Dmitry Eremin-Solenikov to make Qt4 work with
+    OpenSSL 1.1 (Closes: #873275).
+  * Recommend default-libmysqlclient-dev instead of libmysqlclient-dev.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Fri, 10 Nov 2017 15:36:11 -0300
+
+qt4-x11 (4:4.8.7+dfsg-12) experimental; urgency=medium
+
+  * Add openssl_1.1.patch to let Qt4 use OpenSSL 1.1 (Closes: #828522).
+    - Switch libssl-1.0-dev to libssl-dev to use OpenSSL 1.1.
+  * Update symbols files with current build log.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Tue, 15 Aug 2017 13:25:00 -0300
 
 qt4-x11 (4:4.8.7+dfsg-11) unstable; urgency=medium
 
