@@ -76,6 +76,8 @@ QT_BEGIN_HEADER
 #  include "QtCore/qatomic_parisc.h"
 #elif defined(QT_ARCH_POWERPC)
 #  include "QtCore/qatomic_powerpc.h"
+#elif defined(QT_ARCH_RISCV64)
+#  include "QtCore/qatomic_generic.h"
 #elif defined(QT_ARCH_S390)
 #  include "QtCore/qatomic_s390.h"
 #elif defined(QT_ARCH_SPARC)
