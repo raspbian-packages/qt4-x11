@@ -1,9 +1,20 @@
-qt4-x11 (4:4.8.7+dfsg-16+rpi1) buster-staging; urgency=medium
+qt4-x11 (4:4.8.7+dfsg-17+rpi1) buster-staging; urgency=medium
 
   [changes brought forward from 4:4.8.6+git64-g5dc8b2b+dfsg-2+rpi1 by Peter Micheal Green <plugwash@raspbian.org> at Thu, 31 Jul 2014 22:56:54 +0000]
   * Disable neon
 
- -- Raspbian forward porter <root@raspbian.org>  Tue, 15 May 2018 04:14:23 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 24 May 2018 12:03:16 +0000
+
+qt4-x11 (4:4.8.7+dfsg-17) unstable; urgency=medium
+
+  * Add fix-build-icu59.patch from OpenSuse. Fixes build with icu59
+   (Closes: #898542). Thanks John Paul Adrian Glaubitz for digging the
+   patch!
+  * Put the source package in section oldlibs. We do not expect new
+    developments with qt4-x11.
+  * Update Vcs-[Git Browser] to the new location in salsa.debian.org.
+
+ -- Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>  Tue, 15 May 2018 13:24:10 -0300
 
 qt4-x11 (4:4.8.7+dfsg-16) unstable; urgency=medium
 
