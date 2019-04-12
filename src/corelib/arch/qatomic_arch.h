@@ -92,6 +92,8 @@ QT_BEGIN_HEADER
 #  include "QtCore/qatomic_sh.h"
 #elif defined(QT_ARCH_SH4A)
 #  include "QtCore/qatomic_sh4a.h"
+#elif defined(QT_ARCH_X32)
+#  include "QtCore/qatomic_i386.h"
 #elif defined(QT_ARCH_NACL)
 #  include "QtCore/qatomic_generic.h"
 #elif defined(QT_ARCH_AARCH64)
