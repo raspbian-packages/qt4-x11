@@ -614,7 +614,7 @@ SYMBOL_STRING(ctiOpThrowNotCaught) ":" "\n"
 
 #elif COMPILER(GCC) && CPU(ARM_TRADITIONAL)
 
-asm volatile (
+__asm volatile (
 ".text\n"
 ".globl " SYMBOL_STRING(ctiTrampoline) "\n"
 HIDE_SYMBOL(ctiTrampoline) "\n"
@@ -632,7 +632,7 @@ SYMBOL_STRING(ctiTrampoline) ":" "\n"
     "mov pc, lr" "\n"
 );
 
-asm volatile (
+__asm volatile (
 ".globl " SYMBOL_STRING(ctiVMThrowTrampoline) "\n"
 HIDE_SYMBOL(ctiVMThrowTrampoline) "\n"
 SYMBOL_STRING(ctiVMThrowTrampoline) ":" "\n"
@@ -1024,7 +1024,7 @@ static NEVER_INLINE void throwStackOverflowError(CallFrame* callFrame, JSGlobalD
     extern "C" { \
         rtype JITStubThunked_##op(STUB_ARGS_DECLARATION); \
     }; \
-    asm volatile ( \
+    __asm volatile ( \
         ".text" "\n" \
         ".align 2" "\n" \
         ".globl " SYMBOL_STRING(cti_##op) "\n" \
@@ -1053,7 +1053,7 @@ COMPILE_ASSERT(offsetof(struct JITStackFrame, thunkReturnAddress) == THUNK_RETUR
     extern "C" { \
         rtype JITStubThunked_##op(STUB_ARGS_DECLARATION); \
     }; \
-    asm volatile ( \
+    __asm volatile ( \
         ".globl " SYMBOL_STRING(cti_##op) "\n" \
         HIDE_SYMBOL(cti_##op) "\n"             \
         SYMBOL_STRING(cti_##op) ":" "\n" \
