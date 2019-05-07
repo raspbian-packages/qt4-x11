@@ -1,0 +1,81 @@
+From 8c199714e9bc638fb3f6ec747fb7a23373e49335 Mon Sep 17 00:00:00 2001
+From: Eirik Aavitsland <eirik.aavitsland@qt.io>
+Date: Mon, 9 Jul 2018 10:45:22 +0200
+Subject: [PATCH] Fix crash when parsing malformed url reference
+
+The parsing did not check for end of input.
+
+Change-Id: I56a478877d242146395977b767511425d2b8ced1
+Reviewed-by: Lars Knoll <lars.knoll@qt.io>
+---
+ src/svg/qsvghandler.cpp                      | 11 +++++----
+ tests/auto/qsvgrenderer/tst_qsvgrenderer.cpp | 26 ++++++++++++++++++++
+ 2 files changed, 32 insertions(+), 5 deletions(-)
+
+--- a/src/svg/qsvghandler.cpp
++++ b/src/svg/qsvghandler.cpp
+@@ -746,16 +746,17 @@
+ static QString idFromUrl(const QString &url)
+ {
+     QString::const_iterator itr = url.constBegin();
+-    while ((*itr).isSpace())
++    QString::const_iterator end = url.constEnd();
++    while (itr != end && (*itr).isSpace())
+         ++itr;
+-    if ((*itr) == QLatin1Char('('))
++    if (itr != end && (*itr) == QLatin1Char('('))
+         ++itr;
+-    while ((*itr).isSpace())
++    while (itr != end && (*itr).isSpace())
+         ++itr;
+-    if ((*itr) == QLatin1Char('#'))
++    if (itr != end && (*itr) == QLatin1Char('#'))
+         ++itr;
+     QString id;
+-    while ((*itr) != QLatin1Char(')')) {
++    while (itr != end && (*itr) != QLatin1Char(')')) {
+         id += *itr;
+         ++itr;
+     }
+--- a/tests/auto/qsvgrenderer/tst_qsvgrenderer.cpp
++++ b/tests/auto/qsvgrenderer/tst_qsvgrenderer.cpp
+@@ -70,6 +70,8 @@
+     void getSetCheck();
+     void inexistentUrl();
+     void emptyUrl();
++    void invalidUrl_data();
++    void invalidUrl();
+     void testStrokeWidth();
+     void testMapViewBoxToTarget();
+     void testRenderElement();
+@@ -148,6 +150,30 @@
+     QVERIFY(renderer.isValid());
+ }
+ 
++void tst_QSvgRenderer::invalidUrl_data()
++{
++    QTest::addColumn<QByteArray>("svg");
++
++    QTest::newRow("00") << QByteArray("<svg><circle fill=\"url\" /></svg>");
++    QTest::newRow("01") << QByteArray("<svg><circle fill=\"url0\" /></svg>");
++    QTest::newRow("02") << QByteArray("<svg><circle fill=\"url(0\" /></svg>");
++    QTest::newRow("03") << QByteArray("<svg><circle fill=\"url (0\" /></svg>");
++    QTest::newRow("04") << QByteArray("<svg><circle fill=\"url ( 0\" /></svg>");
++    QTest::newRow("05") << QByteArray("<svg><circle fill=\"url#\" /></svg>");
++    QTest::newRow("06") << QByteArray("<svg><circle fill=\"url#(\" /></svg>");
++    QTest::newRow("07") << QByteArray("<svg><circle fill=\"url(#\" /></svg>");
++    QTest::newRow("08") << QByteArray("<svg><circle fill=\"url(# \" /></svg>");
++    QTest::newRow("09") << QByteArray("<svg><circle fill=\"url(# 0\" /></svg>");
++}
++
++void tst_QSvgRenderer::invalidUrl()
++{
++    QFETCH(QByteArray, svg);
++
++    QSvgRenderer renderer(svg);
++    QVERIFY(renderer.isValid());
++}
++
+ void tst_QSvgRenderer::testStrokeWidth()
+ {
+     qreal squareSize = 30.0;
