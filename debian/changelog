@@ -1,8 +1,25 @@
-qt4-x11 (4:4.8.6+git64-g5dc8b2b+dfsg-3+deb8u1+rpi1) jessie-staging; urgency=medium
+qt4-x11 (4:4.8.6+git64-g5dc8b2b+dfsg-3+deb8u2+rpi1) jessie-staging; urgency=medium
+
   [changes brought forward from 4:4.8.6+git64-g5dc8b2b+dfsg-2+rpi1 by Peter Micheal Green <plugwash@raspbian.org> at Thu, 31 Jul 2014 22:56:54 +0000]
   * Disable neon
 
- -- Raspbian forward porter <root@raspbian.org>  Sun, 14 Jun 2015 16:38:43 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 30 May 2019 21:18:49 +0000
+
+qt4-x11 (4:4.8.6+git64-g5dc8b2b+dfsg-3+deb8u2) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the LTS team.
+  * CVE-2018-15518: Fix a double-free or corruption during parsing
+    of a specially crafted illegal XML document.
+  * CVE-2018-19870: A malformed GIF image might have caused a NULL
+    pointer dereference in QGifHandler resulting in a segmentation fault.
+  * CVE-2018-19873: QBmpHandler had a buffer overflow via BMP data.
+  * CVE-2018-19871: TGA handler: check for out of range image size
+    Make the decoder fail early to avoid spending time and memory on
+    attempting to decode a corrupt image file.
+  * CVE-2018-19869:  Fix crash when parsing malformed url reference, The
+    parsing did not check for end of input. 
+
+ -- Mike Gabriel <sunweaver@debian.org>  Tue, 07 May 2019 09:14:21 +0200
 
 qt4-x11 (4:4.8.6+git64-g5dc8b2b+dfsg-3+deb8u1) stable-proposed-updates; urgency=medium
 

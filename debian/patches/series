@@ -57,3 +57,8 @@ remove_addsense.patch
 parisc-atomic.patch
 ppc64el_configure_support.patch
 cve-2015-0295.diff
+cve_2018-15518.patch
+cve_2018-19870.patch
+cve_2018-19873.patch
+cve_2018-19871.patch
+cve_2018-19869.patch
