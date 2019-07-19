@@ -1,4 +1,4 @@
-qt4-x11 (4:4.8.7+dfsg-18+rpi1) buster-staging; urgency=medium
+qt4-x11 (4:4.8.7+dfsg-19+rpi1) bullseye-staging; urgency=medium
 
   [changes brought forward from 4:4.8.6+git64-g5dc8b2b+dfsg-2+rpi1 by Peter Micheal Green <plugwash@raspbian.org> at Thu, 31 Jul 2014 22:56:54 +0000]
   * Disable neon
@@ -6,7 +6,17 @@ qt4-x11 (4:4.8.7+dfsg-18+rpi1) buster-staging; urgency=medium
   [changes brought forward from 4:4.8.7+dfsg-17+rpi2 by Peter Michael Green <plugwash@raspbian.org> at Sun, 14 Apr 2019 10:25:37 +0000]
   * Replace a number of occourances of "asm" with "__asm"
 
- -- Raspbian forward porter <root@raspbian.org>  Mon, 15 Apr 2019 12:36:18 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Fri, 19 Jul 2019 23:28:16 +0000
+
+qt4-x11 (4:4.8.7+dfsg-19) unstable; urgency=medium
+
+  * Team upload.
+  * Fix FTBS with GCC 9. (Closes: #925811)
+    - Add gcc9-qforeach.patch to backport Q_FOREACH changes from Qt 5
+    - Update qt-everywhere-opensource-src-4.8.7-gcc6.patch to add GCC 9 to
+      the compiler checks
+
+ -- Felix Geyer <fgeyer@debian.org>  Sun, 14 Jul 2019 12:19:27 +0200
 
 qt4-x11 (4:4.8.7+dfsg-18) unstable; urgency=medium
 
