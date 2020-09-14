@@ -213,7 +213,11 @@
 /* CPU(X86_64) - AMD64 / Intel64 / x86_64 64-bit */
 #if   defined(__x86_64__) \
     || defined(_M_X64)
+#ifdef __ILP32__
+#define WTF_CPU_X86_64_32 1
+#else
 #define WTF_CPU_X86_64 1
+#endif
 #endif
 
 /* 64-bit mode on AIX */
