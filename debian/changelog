@@ -1,9 +1,24 @@
-qt4-x11 (4:4.8.7+dfsg-11+rpi1) stretch-staging; urgency=medium
+qt4-x11 (4:4.8.7+dfsg-11+rpi1+deb9u1) stretch-staging; urgency=medium
 
   [changes brought forward from 4:4.8.6+git64-g5dc8b2b+dfsg-2+rpi1 by Peter Micheal Green <plugwash@raspbian.org> at Thu, 31 Jul 2014 22:56:54 +0000]
   * Disable neon
 
- -- Raspbian forward porter <root@raspbian.org>  Tue, 15 Nov 2016 19:34:19 +0000
+ -- Raspbian forward porter <root@raspbian.org>  Thu, 01 Oct 2020 19:15:48 +0000
+
+qt4-x11 (4:4.8.7+dfsg-11+deb9u1) stretch-security; urgency=medium
+
+  * Non-maintainer upload by the LTS team.
+  * CVE-2018-15518: Double-free or corruption in QXmlStreamReader
+    during parsing of a specially crafted illegal XML document.
+  * CVE-2018-19869: A malformed SVG image causes a segmentation fault.
+  * CVE-2018-19870: A malformed GIF image causes a NULL pointer
+    dereference in QGifHandler resulting in a segmentation fault.
+  * CVE-2018-19871: Uncontrolled Resource Consumption in QTgaFile.
+  * CVE-2018-19872: A malformed PPM image causes a crash.
+  * CVE-2018-19873: QBmpHandler segfault on malformed BMP file.
+  * CVE-2020-17507: Buffer over-read in the XBM parser.
+
+ -- Adrian Bunk <bunk@debian.org>  Sun, 20 Sep 2020 22:01:50 +0300
 
 qt4-x11 (4:4.8.7+dfsg-11) unstable; urgency=medium
 
