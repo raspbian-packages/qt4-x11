@@ -2946,6 +2946,8 @@ static QSvgStyleProperty *createRadialGradientNode(QSvgNode *node,
         ncy = toDouble(cy);
     if (!r.isEmpty())
         nr = toDouble(r);
+    if (nr < 0.5)
+        nr = 0.5;
 
     qreal nfx = ncx;
     if (!fx.isEmpty())
