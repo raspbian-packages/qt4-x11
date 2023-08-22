@@ -1,0 +1,5 @@
+# CI is disabled because the source of this project is too big for the current
+# CI infrastructure configuration; this issue is known to the Salsa CI team,
+# c.f. https://salsa.debian.org/salsa-ci-team/pipeline/-/issues/195
+#include:
+#- https://salsa.debian.org/lts-team/pipeline/raw/master/recipes/buster.yml
