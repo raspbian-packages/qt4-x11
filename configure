@@ -3330,6 +3330,12 @@ if [ -z "${CFG_HOST_ARCH}" ]; then
         fi
         CFG_HOST_ARCH=sh
         ;;
+    *:*:x32)
+        if [ "$OPT_VERBOSE" = "yes" ]; then
+            echo "    32-bit AMD 80x86 (x32)"
+        fi
+        CFG_HOST_ARCH=x32
+        ;;
     *:*:*)
         if [ "$OPT_VERBOSE" = "yes" ]; then
             echo "    Trying '$UNAME_MACHINE'..."
