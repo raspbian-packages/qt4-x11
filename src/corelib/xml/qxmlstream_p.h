@@ -790,6 +790,21 @@ public:
 #endif
     bool atEnd;
 
+    // 'enum class XmlContext' is changed to 'enum XmlContext' since the former
+    // is technically a scoped enum, which requires c++11
+    enum XmlContext
+    {
+        Prolog,
+        Body,
+    };
+
+    // don't initialize currentContext and foundDTD, which are initialized in init()
+    // this avoids "warning: non-static data member initializers only available with c++11"
+    XmlContext currentContext;
+    bool foundDTD;
+    bool isValidToken(QXmlStreamReader::TokenType type);
+    void checkToken();
+
     /*!
       \sa setType()
      */
