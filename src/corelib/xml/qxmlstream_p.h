@@ -986,7 +986,16 @@ public:
     int fastScanLiteralContent();
     int fastScanSpace();
     int fastScanContentCharList();
-    int fastScanName(int *prefix = 0);
+
+    struct FastScanNameResult {
+        FastScanNameResult() : ok(false) {}
+        explicit FastScanNameResult(int len) : addToLen(len), ok(true) { }
+        operator bool() { return ok; }
+        int operator*() { Q_ASSERT(ok); return addToLen; }
+        int addToLen;
+        bool ok;
+    };
+    FastScanNameResult fastScanName(Value *val = 0);
     inline int fastScanNMTOKEN();
 
 
@@ -995,6 +1004,7 @@ public:
 
     void raiseError(QXmlStreamReader::Error error, const QString& message = QString());
     void raiseWellFormedError(const QString &message);
+    void raiseNamePrefixTooLongError();
 
     QXmlStreamEntityResolver *entityResolver;
 
@@ -1917,7 +1927,12 @@ bool QXmlStreamReaderPrivate::parse()
         break;
 
         case 262: {
-            sym(1).len += fastScanName(&sym(1).prefix);
+            Value &val = sym(1);
+            if (FastScanNameResult res = fastScanName(&val))
+                val.len += *res;
+            else
+                return false;
+
             if (atEnd) {
                 resume(262);
                 return false;
@@ -1925,7 +1940,11 @@ bool QXmlStreamReaderPrivate::parse()
         } break;
 
         case 263:
-            sym(1).len += fastScanName();
+            if (FastScanNameResult res = fastScanName())
+                sym(1).len += *res;
+            else
+                return false;
+
             if (atEnd) {
                 resume(263);
                 return false;
