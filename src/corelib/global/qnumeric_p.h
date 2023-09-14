@@ -238,6 +238,30 @@ static inline bool qt_is_finite(float d)
     }
 }
 
+/*
+ * The section that follows, i.e., the add_overflow() implementation, was taken
+ * from ./src/corelib/global/qnumeric_p.h in an older (i.e., pre-c++11) version
+ * (as of commit 5ff7a3d96e0ce0dcb3d388b53d038cdd40c7a975) of the upstream code:
+ * https://code.qt.io/cgit/qt/qtbase.git/tree/src/corelib/global/qnumeric_p.h?id=5ff7a3d96e0ce0dcb3d388b53d038cdd40c7a975
+ *
+ * These functions are needed to support part of the patch for CVE-2023-32763.
+ * The older versions are needed because enabling c++11 in this older version is
+ * not possible, as it breaks other parts of the build. Additionally, while the
+ * code from which this originates includes add_overflow implementations for
+ * both unsigned and signed operations, the specific implementation that is
+ * required for this patch is for signed addition, so that is the only method
+ * which has been backported.
+ */
+#include <limits>
+// Signed overflow math
+
+inline bool add_overflow(int v1, int v2, int *r)
+{
+    qint64 t = qint64(v1) + v2;
+    *r = static_cast<int>(t);
+    return t > std::numeric_limits<int>::max() || t < std::numeric_limits<int>::min();
+}
+
 QT_END_NAMESPACE
 
 #endif // QNUMERIC_P_H
